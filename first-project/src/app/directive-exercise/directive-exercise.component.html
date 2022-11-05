@@ -1,0 +1,7 @@
+<button class="btn btn-primary" (click)="togglePara()">Display details</button>
+<p *ngIf="paraHidden">This is a paragraph</p>
+
+  <p *ngFor="let item of buttonclickLogs; index as i"
+   [ngStyle]="{backgroundColor: i >=4 ? 'blue':'transparent'}"
+   [ngClass]="{'text-color': i >= 4}">{{i+1}}{{item}}</p>
+

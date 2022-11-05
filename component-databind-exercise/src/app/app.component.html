@@ -1,0 +1,8 @@
+<app-game-control (number)="emittedNumbers($event)"></app-game-control>
+
+<div *ngFor="let number of emittednumbers">
+  <app-odd [num]="number" *ngIf="isEven(number) != 0;  else even"></app-odd>
+  <ng-template #even>
+    <app-even [num]="number"></app-even>
+  </ng-template>
+</div>
