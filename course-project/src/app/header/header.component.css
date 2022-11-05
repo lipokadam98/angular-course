@@ -1,0 +1,26 @@
+.recipe-nav{
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  padding-right:10px;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+  z-index: 100;
+  height: 60px;
+  background-color: rgb(235, 229, 229);
+}
+
+.recipe-nav-left{
+  align-items: center;
+  display: flex;
+  gap: 30px;
+}
+
+.sticky-header{
+  position: sticky;
+  top:0;
+  left:0;
+  right: 0;
+  z-index: 100;
+  background-color: lightpink;
+}
