@@ -34,20 +34,18 @@
 <header>
   <div class="recipe-nav">
     <div class="recipe-nav-left">
-      <a class="navbar-brand" href="#">Recipe Book</a>
-      <a class="nav-link" href="#" (click)="onSelect('recipe')">Recipes</a>
-      <a class="nav-link" href="#" (click)="onSelect('shopping-list')">Shopping List</a>
+      <a class="navbar-brand" [routerLink]="['']">Recipe Book</a>
+      <a class="nav-link" [routerLink]="['recipes']" routerLinkActive="active">Recipes</a>
+      <a class="nav-link" [routerLink]="['shopping-list']" routerLinkActive="active">Shopping List</a>
     </div>
     <div class="recipe-nav-right">
-      <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Manage
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
+      <div class="btn-group" appDropdown>
+        <button class="btn btn-primary dropwdown-toggle">Manage
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a style="cursor: pointer;">Save Data</a></li>
+          <li><a style="cursor: pointer;">Fetch Data</a></li>
         </ul>
       </div>
     </div>
