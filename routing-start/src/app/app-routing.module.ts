@@ -1,3 +1,6 @@
+import { ServerResolverService } from './servers/server/server-resolver.service';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { AuthGuard } from './auth-guard.service';
 import { UsersComponent } from './users/users.component';
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
@@ -7,22 +10,25 @@ import { EditServerComponent } from './servers/edit-server/edit-server.component
 import { ServerComponent } from './servers/server/server.component';
 import { ServersComponent } from './servers/servers.component';
 import { UserComponent } from './users/user/user.component';
+import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard.service';
 
 const appRoutes: Routes = [
   {path: '',component: HomeComponent},
   {path: 'users',component: UsersComponent,children: [
     {path: ':id/:name',component: UserComponent}
   ]},
-  {path: 'servers',component: ServersComponent ,children:[
-    {path: ':id',component: ServerComponent},
-    {path: ':id/edit',component: EditServerComponent},
+  {path: 'servers', canActivateChild: [AuthGuard],component: ServersComponent ,children:[
+    {path: ':id',component: ServerComponent , resolve: {server: ServerResolverService}},
+    {path: ':id/edit',component: EditServerComponent, canDeactivate: [CanDeactivateGuard]},
   ]},
-  {path: 'not-found',component: PageNotFoundComponent},
+  //{path: 'not-found',component: PageNotFoundComponent},
+  {path: 'not-found',component: ErrorPageComponent, data: {message: 'Page not found!'}},
   {path: '**',redirectTo: '/not-found'},
 ];
 
 @NgModule({
   imports: [
+    //RouterModule.forRoot(appRoutes, {useHash: true})
     RouterModule.forRoot(appRoutes)
   ],
   exports: [

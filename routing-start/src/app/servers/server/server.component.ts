@@ -16,9 +16,13 @@ export class ServerComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.activatedRoute.data.subscribe(data=>{
+      this.server = data['server'];
+    });
+    /*
     this.activatedRoute.params.subscribe((param)=>{
       this.server = this.serversService.getServer(+param['id']);
-    });
+    });*/
   }
 
   onEdit(){
