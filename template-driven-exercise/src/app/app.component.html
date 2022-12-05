@@ -1,0 +1,31 @@
+<form (ngSubmit)="saveForm()" #subform="ngForm">
+  <div class="container-flex">
+    <div class="subscription">
+      <h3>Subscription</h3>
+
+      <div class="error">
+        <input type="email" name="email" ngModel required #email="ngModel" email>
+        <p class="error-message" *ngIf="!email.valid && email.touched">Email address is not valid.</p>
+      </div>
+      <select name="subscription" [ngModel]="defaultSub">
+        <option *ngFor="let sub of subscriptions"
+         [value]="sub">{{sub}}</option>
+      </select>
+
+      <div class="error">
+        <input type="password" name="password" ngModel #password="ngModel" required>
+        <p class="error-message" *ngIf="!password.valid && password.touched">Password is not valid.</p>
+      </div>
+
+      <button type="submit" [disabled]="!subform.valid">Save</button>
+      <div>
+        <p>Email: {{formObject.email}}</p>
+        <p>Subscription: {{formObject.subscription}}</p>
+        <p>Password: {{formObject.password}}</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</form>
