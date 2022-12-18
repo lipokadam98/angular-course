@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-xs-12 col-md-6 col-md-offset-3">
+
+    <div class="alert alert-danger" *ngIf="error">
+      {{error}}
+    </div>
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading;else loading">
+      <div class="form-group">
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" formControlName="email" class="form-control" />
+        <p class="error" *ngIf="authForm.get('email').touched && authForm.get('email').errors != null">The email is missing or it does not meet the minimum requirements in validation</p>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" formControlName="password" />
+        <p class="error" *ngIf="authForm.get('password').touched && authForm.get('password').errors != null">The password is missing or it does not meet the minimum requirements in length</p>
+      </div>
+      <div>
+        <button class="btn btn-primary" [disabled]="!authForm.valid" type="submit">{{isLoginMode ? 'Login' : 'Sign up'}}</button> |
+        <button class="btn btn-primary" (click)="onSwitchMode()" type="button">Switch to {{!isLoginMode ? 'Login' : 'Sign up'}}</button>
+      </div>
+    </form>
+    <ng-template #loading>
+      <div style="display: flex;justify-content: center;align-items: center;">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+    </ng-template>
+  </div>
+</div>
