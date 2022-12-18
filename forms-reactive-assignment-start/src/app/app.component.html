@@ -1,19 +1,35 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <!--
-          Create a Form with the following Controls and Validators
-          1) Project Name (should not be empty)
-          2) Mail (should not be a empty and a valid email)
-          3) Project Status Dropdown, with three values: 'Stable', 'Critical', 'Finished'
-          4) Submit Button
-
-          Add your own Validator which doesn't allow "Test" as a Project Name
-
-          Also implement that Validator as an async Validator (replace the other one)
-
-          Upon submitting the form, simply print the value to the console
-      -->
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group" [formGroup]="formGroup">
+          <div class="row">
+            <label for="projectName">Project name</label>
+            <input id="projectName" class="form-control" type="text" formControlName="projectName" placeholder="Project name">
+            <div class="help-block" *ngIf="formControlError('projectName','required') && formGroup.get('projectName').touched;else forbiddenname">The project name field is missing!</div>
+            <ng-template #forbiddenname>
+              <div class="help-block" *ngIf="formControlError('projectName','nameIsForbiddenAsync') && formGroup.get('projectName').touched;else ">This project name is forbidden!</div>
+            </ng-template>
+          </div>
+          <div class="row">
+            <label for="email">E-mail</label>
+            <input id="email" class="form-control" type="email" formControlName="email">
+            <div class="help-block" *ngIf="formControlError('email','required') && formGroup.get('email').touched">The email field is missing!</div>
+          </div>
+          <div class="row">
+            <label for="projectStatus">Project status</label>
+            <select id="projectStatus" class="form-control" formControlName="projectStatus">
+              <option *ngFor="let status of projectStatuses">
+                {{status}}
+              </option>
+            </select>
+          </div>
+          <hr>
+          <div class="row">
+            <button [disabled]="!formGroup.valid" class="btn btn-primary" type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
